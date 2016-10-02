@@ -1,6 +1,9 @@
 var populateFields = function(input){
   var nameTag = document.querySelector('#itemName');
-  nameTag.innerText = input.inventoryItem.itemName; //Gjallarhorn
+  nameTag.innerText = input.inventoryItem.itemName; 
+
+  var titleTag = document.querySelector('#itemTitle');
+  titleTag.innerText = input.inventoryItem.tierTypeName + ' ' + input.inventoryItem.itemTypeName;
 
   var descTag = document.querySelector('#itemDesc');
   descTag.innerText = input.inventoryItem.itemDescription;
@@ -21,10 +24,9 @@ var itemRequestComplete = function(){
 
 var makeRequest = function(url, callback){
   var request = new XMLHttpRequest();
-  var myApi = new Api();
-  var apiKey = myApi.key;
+  var api = new Api();
   request.open("GET", url);
-  request.setRequestHeader("X-API-Key", apiKey);
+  request.setRequestHeader("X-API-Key", api.key);
   request.onload = callback;
   request.send();
 }
@@ -36,9 +38,21 @@ var handleGjallaClick = function(){
   console.log("After Request");
 }
 
+var handleThornClick = function(){
+  var url = "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/3164616404/";
+  console.log("Before request");
+  makeRequest(url, itemRequestComplete);
+  console.log("After Request");
+}
+
+
+
 var app = function(){
   var button = document.querySelector('#Gjallahorn');
   button.onclick = handleGjallaClick;
+
+  var button = document.querySelector('#Thorn');
+  button.onclick = handleThornClick;
 
 }
 
