@@ -31,28 +31,30 @@ var makeRequest = function(url, callback){
   request.send();
 }
 
-var handleGjallaClick = function(){
-  var url = "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/";
-  console.log("Before request");
-  makeRequest(url, itemRequestComplete);
-  console.log("After Request");
+var handleButtonClick = function(itemId){
+  var requestByItemID = function(){
+    var url = "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/" + itemId + "/";
+    console.log("Before request");
+    makeRequest(url, itemRequestComplete);
+    console.log("After Request");
+  }
+  return requestByItemID;
 }
-
-var handleThornClick = function(){
-  var url = "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/3164616404/";
-  console.log("Before request");
-  makeRequest(url, itemRequestComplete);
-  console.log("After Request");
-}
-
-
 
 var app = function(){
-  var button = document.querySelector('#Gjallahorn');
-  button.onclick = handleGjallaClick;
+  var gjallaButton = document.querySelector('#Gjallahorn');
+  gjallaButton.onclick = handleButtonClick(1274330687);
 
-  var button = document.querySelector('#Thorn');
-  button.onclick = handleThornClick;
+  var thornButton = document.querySelector('#Thorn');
+  thornButton.onclick = handleButtonClick(3164616404);
+
+  var hawkButton = document.querySelector('#Hawkmoon');
+  hawkButton.onclick = handleButtonClick(2447423792);
+
+
+  var badjButton = document.querySelector('#Badjuju');
+  badjButton.onclick = handleButtonClick(1177550374);
+  
 
 }
 
